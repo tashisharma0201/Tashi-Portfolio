@@ -8,11 +8,23 @@ const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
 
 
 // sidebar variables
-const sidebar = document.querySelector("[data-sidebar]");
+const sidebar = document.querySelector("[data-sidebar]");// On all viewports, sidebar is always expanded (no toggle)
+sidebar.classList.add("active");
+
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
 // sidebar toggle functionality for mobile
-sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
+// Auto-expand sidebar on mobile; only add toggle on larger screens
+if (window.innerWidth <= 580) {
+  // On phones, sidebar starts expanded
+  sidebar.classList.add("active");
+} else {
+  // On tablets/desktop, sidebar toggles via button
+  sidebarBtn.addEventListener("click", function () {
+    elementToggleFunc(sidebar);
+  });
+}
+
 
 
 
@@ -159,6 +171,52 @@ navigationLinks.forEach(link => {
     // 5. Scroll to top
     window.scrollTo(0, 0);
   });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+// Theme toggle functionality
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
+const darkIcon = document.querySelector('.dark-icon');
+const lightIcon = document.querySelector('.light-icon');
+
+// Check for saved theme preference or default to dark mode
+const currentTheme = localStorage.getItem('theme') || 'dark';
+body.setAttribute('data-theme', currentTheme);
+
+// Update toggle button appearance based on current theme
+function updateToggleButton() {
+  const theme = body.getAttribute('data-theme');
+  if (theme === 'light') {
+    darkIcon.style.display = 'none';
+    lightIcon.style.display = 'block';
+  } else {
+    darkIcon.style.display = 'block';
+    lightIcon.style.display = 'none';
+  }
+}
+
+// Initialize toggle button
+updateToggleButton();
+
+// Theme toggle event listener
+themeToggle.addEventListener('click', function() {
+  const currentTheme = body.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  
+  body.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  updateToggleButton();
 });
 
 

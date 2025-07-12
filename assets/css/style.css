@@ -1834,13 +1834,17 @@ textarea.form-input::-webkit-resizer { display: none; }
   .sidebar {
     position: sticky;
     top: 60px;
-    max-height: max-content;
+   
     height: 100%;
     margin-bottom: 0;
     padding-top: 60px;
     z-index: 1;
   }
 
+   .sidebar {
+    max-height: none !important;
+    overflow: visible !important;
+  }
   .sidebar-info { flex-direction: column; }
 
   /* Remove rectangular background around avatar */
@@ -1856,11 +1860,11 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .info-content .title { margin: auto; }
 
-  .info_more-btn { display: none; }
+  .info_more-btn { display: none ! important; }
 
   .sidebar-info_more {
-    opacity: 1;
-    visibility: visible;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .contacts-list { grid-template-columns: 1fr; }
@@ -2207,4 +2211,347 @@ textarea.form-input::-webkit-resizer { display: none; }
 .certification-name a:hover {
   text-decoration: underline;
   color: #174ea6; /* Slightly darker blue on hover */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Light/Dark Mode Toggle Styles */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--border-gradient-onyx);
+  border: 1px solid var(--jet);
+  border-radius: 50px;
+  width: 60px;
+  height: 30px;
+  cursor: pointer;
+  transition: var(--transition-1);
+  z-index: 10;
+}
+
+.theme-toggle::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--bg-gradient-jet);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.theme-toggle-slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  background: var(--orange-yellow-crayola);
+  border-radius: 50%;
+  transition: var(--transition-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--smoky-black);
+}
+
+.theme-toggle-slider ion-icon {
+  --ionicon-stroke-width: 50px;
+}
+
+/* Light mode color scheme */
+[data-theme="light"] {
+  --bg-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 92%) 3%,
+    hsl(0, 0%, 88%) 97%
+  );
+  --bg-gradient-jet: linear-gradient(
+    to bottom right,
+    hsla(0, 0%, 96%, 0.8) 0%,
+    hsla(0, 0%, 92%, 0.5) 100%
+  ), hsl(0, 0%, 96%);
+  --bg-gradient-yellow-1: linear-gradient(
+    to bottom right,
+    hsl(45, 100%, 65%) 0%,
+    hsla(36, 100%, 65%, 0) 50%
+  );
+  --bg-gradient-yellow-2: linear-gradient(
+    135deg,
+    hsla(45, 100%, 65%, 0.3) 0%,
+    hsla(35, 100%, 65%, 0) 59.86%
+  ), hsl(0, 0%, 96%);
+  --border-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 78%) 0%,
+    hsla(0, 0%, 78%, 0) 50%
+  );
+  --text-gradient-yellow: linear-gradient(
+    to right,
+    hsl(45, 100%, 45%),
+    hsl(35, 100%, 40%)
+  );
+  
+  --jet: hsl(0, 0%, 82%);
+  --onyx: hsl(0, 0%, 88%);
+  --eerie-black-1: hsl(0, 0%, 96%);
+  --eerie-black-2: hsl(0, 0%, 98%);
+  --smoky-black: hsl(0, 0%, 100%);
+  --white-1: hsl(0, 0%, 15%);
+  --white-2: hsl(0, 0%, 20%);
+  --orange-yellow-crayola: hsl(45, 100%, 45%);
+  --vegas-gold: hsl(45, 54%, 40%);
+  --light-gray: hsl(0, 0%, 35%);
+  --light-gray-70: hsla(0, 0%, 35%, 0.7);
+  --bittersweet-shimmer: hsl(0, 43%, 45%);
+}
+
+/* Light mode toggle button position */
+[data-theme="light"] .theme-toggle-slider {
+  transform: translateX(30px);
+}
+
+/* Light Mode Body Background */
+[data-theme="light"] body {
+  background: hsl(0, 0%, 94%);
+}
+
+/* Light Mode Navbar */
+[data-theme="light"] .navbar {
+  background: hsla(0, 0%, 96%, 0.95);
+  border: 1px solid hsl(0, 0%, 82%);
+  backdrop-filter: blur(10px);
+}
+
+[data-theme="light"] .navbar-link {
+  color: hsl(0, 0%, 20%) !important;
+}
+
+[data-theme="light"] .navbar-link:hover,
+[data-theme="light"] .navbar-link:focus {
+  color: hsl(220, 90%, 50%) !important;
+}
+
+[data-theme="light"] .navbar-link.active {
+  color: hsl(45, 100%, 45%) !important;
+}
+
+/* Light Mode Text */
+[data-theme="light"] .info-content .name {
+  color: hsl(0, 0%, 15%) !important;
+}
+
+[data-theme="light"] .info-content .title {
+  color: hsl(0, 0%, 20%) !important;
+  background: hsl(0, 0%, 88%) !important;
+}
+
+[data-theme="light"] .contact-title {
+  color: hsl(0, 0%, 40%) !important;
+}
+
+/* FIXED: Download CV and Contact Links - Light Mode */
+[data-theme="light"] .contact-info :is(.contact-link, time, address) {
+  color: hsl(0, 0%, 15%) !important;
+}
+
+[data-theme="light"] .contact-info a,
+[data-theme="light"] .contact-link {
+  color: hsl(0, 0%, 15%) !important;
+}
+
+[data-theme="light"] .contact-info a:hover,
+[data-theme="light"] .contact-link:hover {
+  color: hsl(220, 90%, 50%) !important;
+  text-decoration: underline;
+}
+
+[data-theme="light"] .social-link {
+  color: hsl(0, 0%, 15%) !important;
+}
+
+[data-theme="light"] .social-link:hover {
+  color: hsl(220, 90%, 50%) !important;
+  text-decoration: underline;
+}
+
+/* Light Mode Article Content */
+[data-theme="light"] .h2,
+[data-theme="light"] .h3,
+[data-theme="light"] .h4,
+[data-theme="light"] .h5 {
+  color: hsl(0, 0%, 15%) !important;
+}
+
+[data-theme="light"] .about-text {
+  color: hsl(0, 0%, 25%) !important;
+}
+
+[data-theme="light"] .service-item-text,
+[data-theme="light"] .testimonials-text,
+[data-theme="light"] .timeline-text,
+[data-theme="light"] .blog-text {
+  color: hsl(0, 0%, 30%) !important;
+}
+
+[data-theme="light"] .project-title {
+  color: hsl(0, 0%, 15%) !important;
+}
+
+[data-theme="light"] .project-category {
+  color: hsl(0, 0%, 40%) !important;
+}
+
+[data-theme="light"] .form-input {
+  color: hsl(0, 0%, 15%) !important;
+  border-color: hsl(0, 0%, 82%) !important;
+}
+
+[data-theme="light"] .form-input::placeholder {
+  color: hsl(0, 0%, 50%) !important;
+}
+
+[data-theme="light"] .skills-category h3 {
+  color: hsl(45, 100%, 45%) !important;
+}
+
+[data-theme="light"] .skill-bar span {
+  color: hsl(0, 0%, 15%) !important;
+}
+
+[data-theme="light"] .skills-list li {
+  background: hsl(0, 0%, 88%) !important;
+  color: hsl(0, 0%, 15%) !important;
+  border-color: hsl(0, 0%, 82%) !important;
+}
+
+[data-theme="light"] .skills-list li:hover {
+  color: hsl(45, 100%, 45%) !important;
+}
+
+[data-theme="light"] .timeline-item-title {
+  color: hsl(0, 0%, 15%) !important;
+}
+
+[data-theme="light"] .timeline-list span {
+  color: hsl(45, 100%, 45%) !important;
+}
+
+[data-theme="light"] .certifications-title {
+  color: hsl(45, 100%, 45%) !important;
+}
+
+[data-theme="light"] .certification-name {
+  color: hsl(0, 0%, 15%) !important;
+}
+
+[data-theme="light"] .certification-details {
+  color: hsl(0, 0%, 30%) !important;
+}
+
+[data-theme="light"] .certification-name a {
+  color: hsl(0, 0%, 15%) !important;
+}
+
+[data-theme="light"] .certification-name a:hover {
+  color: hsl(220, 90%, 50%) !important;
+  text-decoration: underline;
+}
+
+/* FIXED: Dark Mode Contact Links - Proper Yellow/Mustard Hover */
+.contact-info a,
+.contact-link {
+  color: var(--white-2) !important;
+}
+
+.contact-info a:hover,
+.contact-link:hover {
+  color: var(--orange-yellow-crayola) !important;
+  text-decoration: underline;
+}
+
+.social-link {
+  color: var(--light-gray-70) !important;
+}
+
+.social-link:hover {
+  color: var(--orange-yellow-crayola) !important;
+  text-decoration: underline;
+}
+
+/* Override any browser default link styles */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Responsive positioning for mobile */
+@media (max-width: 580px) {
+  .theme-toggle {
+    top: 15px;
+    right: 15px;
+    width: 50px;
+    height: 25px;
+  }
+  
+  .theme-toggle-slider {
+    width: 20px;
+    height: 20px;
+    top: 2px;
+    left: 2px;
+    font-size: 10px;
+  }
+  
+  [data-theme="light"] .theme-toggle-slider {
+    transform: translateX(25px);
+  }
+}
+
+
+/* Always display contacts section, no toggle button */
+.sidebar {
+  max-height: none !important;
+  overflow: visible !important;
+}
+.sidebar-info_more {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.info_more-btn {
+  display: none !important;
+}
+
+
+/* LeetCode link default color (inherit or your base color) */
+a[href*="https://leetcode.com/u/tashisharma"] {
+  text-decoration: underline;
+  color: #130f05;  /* original color */
+  margin-left: 4px;
+}
+
+/* Light mode: blue on hover */
+[data-theme="light"] a[href*="https://leetcode.com/u/tashisharma"]:hover {
+  color: #0000FF !important;
+}
+
+/* Dark mode: mustard yellow on hover */
+[data-theme="dark"] a[href*="https://leetcode.com/u/tashisharma"]:hover {
+  color: var(--orange-yellow-crayola) !important;
+}
+/* LeetCode link default in dark mode: white */
+[data-theme="dark"] a[href*="https://leetcode.com/u/tashisharma"] {
+  color: #FFFFFF !important;
 }
