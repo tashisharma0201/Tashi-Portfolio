@@ -2023,6 +2023,13 @@ textarea.form-input::-webkit-resizer { display: none; }
   content: "70%";
 }
 
+.bar.typescript { 
+  width: 70%; 
+}
+.bar.typescript::after {
+  content: "70%";
+}
+
 /* Alternative: Show percentage outside the bar */
 .skill-bar::after {
   content: attr(data-percentage);
